@@ -1,71 +1,97 @@
-
 function computerPlay()
 {
-    let choice = Math.floor(Math.random() * 4);
-    while(choice < 1)
+    const choice = Math.floor(Math.random() * 3)
+    
+    if(choice === 0)
     {
-        choice = Math.floor(Math.random() * 4);
+        return "rock";
     }
-
-    if(choice == 1)
+    if(choice === 1)
     {
-        return "Rock".toLowerCase();
+        return "paper";
     }
-    if(choice == 2)
+    if(choice === 2)
     {
-        return "Paper".toLowerCase();
-    }
-    if(choice == 3)
-    {
-        return "Scissors".toLowerCase();
+        return "scissors";
     }
 }
 
-function Round(playerSelection, computerSelection)
+function playerSelection() 
 {
-    calculateWinner(playerSelection, computerSelection);   
+    let choice = window.prompt("Choose your weapon!:").toLowerCase();
+    return choice;
 }
 
-function calculateWinner(a, b)
+function playRound(playerChoice, computerChoice)
+{   
+    if(playerChoice === computerChoice)
+    {
+        whoWon = "computer";
+        return "Tie!";
+    }
+
+    if(playerChoice === "rock" && computerChoice === "paper")
+    {
+        whoWon = "computer"
+        return "Computer wins!";
+    }
+    if(playerChoice === "rock" && computerChoice === "scissors")
+    {
+        whoWon = "player";
+        return "Player wins!";
+    }
+    
+    if(playerChoice === "paper" && computerChoice === "rock")
+    {
+        whoWon = "player";
+        return "Player wins!";
+    }
+    if(playerChoice === "paper" && computerChoice === "scissors")
+    {
+        whoWon = "computer"
+        return "Computer wins!";
+    }
+    if(playerChoice === "scissors" && computerChoice === "rock")
+    {
+        whoWon = "computer"
+        return "Computer wins!";
+    }
+    if(playerChoice === "scissors" && computerChoice === "paper")
+    {
+        whoWon = "player";
+        return "Player wins!";
+    }
+}
+
+function checkWinner()
 {
-    if(a == b)
+    if(whoWon === "player")
     {
-        window.alert("Tie!");
+        playerScore++;
+        console.log("player wins! with " + playerScore + " points!");
     }
-
-    if(a == "rock" && b == "paper")
+    if(whoWon === "computer")
     {
-        window.alert("Computer Wins!");
-    }
-    if(a == "rock" && b == "scissors")
-    {
-        window.alert("Player wins!");
-    }
-
-    if(a == "paper" && b == "rock")
-    {
-        window.alert("Player wins!");
-    }
-    if(a == "paper" && b == "scissors")
-    {
-        window.alert("Computer wins!");
-    }
-
-    if(a == "scissors" && b == "rock")
-    {
-        window.alert("Computer wins!");
-    }
-    if(a == "scissors" && b == "paper")
-    {
-        window.alert("Player wins!");
+        computerScore++;
+        console.log("computer wins! with " + computerScore + " points!");
     }
 }
 
-function getPlayerInput()
+function game() 
 {
-    window.prompt("Enter input: ");
+    window.prompt("Welcome to Rock Paper Scissors!, type 'start' to begin!");
+
+    for(let i = 0; i <= 5; i++)
+    {
+        playRound(playerSelection(), computerAnswer)
+        checkWinner();
+    }
 }
 
-Round(getPlayerInput(), computerPlay());
+let playerScore = 0;
+let computerScore = 0;
+const computerAnswer = computerPlay();
+var whoWon;
 
+game();
 
